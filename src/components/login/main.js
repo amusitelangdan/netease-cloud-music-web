@@ -15,9 +15,9 @@ const titleList = {
   2: '网易账户登录'
 }
 export default ({ type = 1, onSave, onClose }) => {
-  const { dispatch, ajax, history } = useContext(GlobalContext)
+  const { dispatch, history, ajax } = useContext(GlobalContext)
+
   const [ loginType, setLoginType ] = useState(type)
-  console.log(history)
   return (
     <Dialog.Global title={loginType === -1 ? '登录' : titleList[loginType]} globalClass={style.box} onClose={onClose}>
       {((_type) => {
@@ -26,10 +26,11 @@ export default ({ type = 1, onSave, onClose }) => {
             return (
               <Phone
                 onSave={({ phone, pwd }) => {
-                  ajax(API.loginByPhone, { phone, password: pwd })
+                  dispatch(ajax(API.loginByPhone, { phone, password: pwd }))
                     .then((data) => {
                       dispatch(setUserInfo(data))
                       onClose()
+                      history.push({ pathname: '/discover' })
                     })
                     .catch((error) => {
                       console.error(error)
@@ -41,10 +42,11 @@ export default ({ type = 1, onSave, onClose }) => {
             return (
               <Email
                 onSave={({ email, pwd }) => {
-                  ajax(API.login, { email, password: pwd })
+                  dispatch(ajax(API.loginByPhone, { email, password: pwd }))
                     .then((data) => {
                       dispatch(setUserInfo(data))
                       onClose()
+                      history.push({ pathname: '/discover' })
                     })
                     .catch((error) => {
                       console.error(error)

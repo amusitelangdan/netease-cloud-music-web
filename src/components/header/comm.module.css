@@ -9,12 +9,7 @@
   background: #242424;
   border-bottom: 1px solid #000;
 }
-.wrap {
-  width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-}
+
 .logo {
   width: 176px;
   height: 69px;
@@ -103,6 +98,10 @@
   left: 20px;
   background: #2b2b2b;
   border-radius: 4px;
+}
+.box .follow_user {
+  top: -1px;
+  left: 0px;
 }
 .box .login_btn {
   background-color: initial;
